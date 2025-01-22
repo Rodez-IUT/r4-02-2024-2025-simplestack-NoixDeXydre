@@ -19,6 +19,21 @@ class SimpleStackTest {
         // Then… (oracle)
         assertTrue(stack.isEmpty(), "A new stack must be empty");
         assertEquals( 0, stack.getSize(), "A new stack has no element");
+
+        stack.push(new SimpleItem());
+        assertTrue(!stack.isEmpty(), "A stack with one Item shouldn't be empty");
+        assertEquals( 1, stack.getSize(), "The stack should have a size of 1");
+    }
+
+    @Test
+    @DisplayName("Test the peek of items")
+    public void testPeek() throws EmptyStackException {
+
+        Stack stack = new SimpleStack();
+
+        // When we "peek" the stack, should throws an EmptyStackException.
+        assertThrows(EmptyStackException.class, ()->stack.peek(), "EmptyStackException not thrown");
+        assertThrows(EmptyStackException.class, stack::peek, "EmptyStackException not thrown");
     }
 
     @Test
@@ -35,7 +50,7 @@ class SimpleStackTest {
         // Then…
         assertFalse(stack.isEmpty(), "The stack must not be empty");
         assertEquals(1, stack.getSize(),"The stack must constain 1 item");
-        assertSame( item, stack.peek(),"The pushed item must be is on top of the stack");
+        assertSame(item, stack.peek(),"The pushed item must be is on top of the stack");
 
         // Given a new item to add
         Item item2 = new SimpleItem();
@@ -50,14 +65,26 @@ class SimpleStackTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("Test limit when trying to pop an empty stack")
-    public void testPopOnEmptyStack()  {
+    public void testPopOnEmptyStack() throws EmptyStackException {
+
         // Given an empty stack
         Stack stack = new SimpleStack();
 
         // When we "pop" the stack, should throws an EmptyStackException.
-        //assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
+        assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
         assertThrows(EmptyStackException.class, stack::pop, "EmptyStackException not thrown");
+
+        // We now test with the removal of two items
+        SimpleItem item1 = new SimpleItem();
+        SimpleItem item2 = new SimpleItem();
+
+        stack.push(item1);
+        stack.push(item2);
+
+        assertEquals(item2, stack.pop(), "The popped item must be returned");
+        stack.pop();
+
+        assertTrue(stack.isEmpty(), "Stack must be empty after all the items removed");
     }
 }
