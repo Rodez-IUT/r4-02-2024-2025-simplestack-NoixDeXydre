@@ -1,7 +1,16 @@
+/*
+ * SimpleStack.java             29 january 2025
+ * IUT de Rodez, no rights reserved
+ */
+
 package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Implements behaviour of a simple stack
+ * @author Noa M'TIMA LESNIAK
+ */
 public class SimpleStack implements Stack {
 
     /** Total size of the stack */
@@ -20,6 +29,7 @@ public class SimpleStack implements Stack {
 
     /**
      * Tests if this stack is empty
+     * @return true if stack is empty, false otherwise
      */
     @Override
     public boolean isEmpty() {
@@ -27,7 +37,7 @@ public class SimpleStack implements Stack {
     }
 
     /**
-     * Returns the number of items in this stack.
+     * @return Returns the number of items in this stack.
      */
     @Override
     public int getSize() {
@@ -48,6 +58,7 @@ public class SimpleStack implements Stack {
 
     /**
      * Looks at the object at the top of this stack without removing it from the stack.
+     * @return the first element of the stack
      */
     @Override
     public Item peek() throws EmptyStackException {
@@ -63,6 +74,7 @@ public class SimpleStack implements Stack {
      * Removes the object at the top of this stack and returns
      * that object as the value of this function.
      *
+     * @return the removed Item
      * @throws EmptyStackException if this stack is empty.
      */
     @Override
